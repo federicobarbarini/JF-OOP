@@ -1,7 +1,11 @@
 ﻿using Ereditarieta;
 // See https://aka.ms/new-console-template for more information
 
+var ctx = new Ereditarieta.ORM.Context(@"C:\JobFactory\");
+var auto = ctx.LoadAuto();
+
 var elenco = new List<Ereditarieta.Model.iEntity>();
+elenco.AddRange(auto);
 elenco.Add(new Ereditarieta.Model.Auto("vW","Golf 7"));
 elenco.Add(new Ereditarieta.Model.Auto("vW", "Golf 8"));
 elenco.Add(new Ereditarieta.Model.Moto("KTM", "Super Duke 990"));
@@ -9,8 +13,6 @@ elenco.Add(new Ereditarieta.Model.Moto("KTM", "Super Duke 1390"));
 elenco.Add(new Ereditarieta.Model.Bici("Cannondale", "Trail 8"));
 elenco.Add(new Ereditarieta.Model.Persone("Barbarini", "Federico", "Casteggio", 19780623));
 
-
-var ctx = new Ereditarieta.ORM.Context(@"C:\JobFactory\");
 ctx.Save<Ereditarieta.Model.Auto>(elenco);
 ctx.Save<Ereditarieta.Model.Moto>(elenco);
 ctx.Save<Ereditarieta.Model.Bici>(elenco);
