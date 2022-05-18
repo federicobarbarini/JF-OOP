@@ -11,6 +11,7 @@ namespace Ereditarieta.Model
 
         #region --> Costruttori
 
+        public Auto():this(string.Empty, string.Empty) {}
         public Auto(string marca, string modello): base(marca, modello, 4) {}
 
         #endregion

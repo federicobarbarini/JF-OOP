@@ -10,6 +10,7 @@ namespace Ereditarieta.Model
     {
 
         #region --> Costruttori
+        public Bici() : this(string.Empty, string.Empty) { }
 
         public Bici(string marca, string modello) : base(marca, modello, 2) { }
 

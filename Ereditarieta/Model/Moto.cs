@@ -11,6 +11,8 @@ namespace Ereditarieta.Model
 
         #region --> Costruttori
 
+        public Moto() : this(string.Empty, string.Empty) { }
+
         public Moto(string marca, string modello) : base(marca, modello, 2) { }
 
         #endregion

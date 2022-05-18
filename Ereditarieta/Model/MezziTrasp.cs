@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ereditarieta.Model
 {
-    public abstract class MezziTrasp: iMuoviti
+    public abstract class MezziTrasp: iMuoviti, iEntity
     {
 
         #region --> Dichiarazioni
@@ -31,6 +31,8 @@ namespace Ereditarieta.Model
         #endregion
 
         #region --> Proprietà
+
+        public Guid ID { get ; set; } = Guid.NewGuid();
 
         public string? Carburante { get; set; }
 
