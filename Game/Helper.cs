@@ -10,6 +10,7 @@ namespace Game
 {
     internal static class Helper
     {
+
         #region --> CSV
 
         /// <summary>
@@ -40,6 +41,7 @@ namespace Game
             {
                 Delimiter = delimiter
             };
+            config.MissingFieldFound = (CsvHelper.MissingFieldFoundArgs args) =>{ };
 
             using (var r = new System.IO.StreamReader(System.IO.Path.Combine("../../../dati", nfile)))
             {
@@ -50,6 +52,13 @@ namespace Game
             };
         }
 
+        /// <summary>
+        /// Esporta CSV
+        /// </summary>
+        /// <typeparam name="t">Tipo di Calsse da importare</typeparam>
+        /// <param name="items">Elenco degli oggetti da esportare</param>
+        /// <param name="nfile">nome del file</param>
+        /// <param name="delimiter">delimitatore di campo</param>
         public static void ToCSV<t>(t[] items,string nFile, string delimiter)
         {
             var config = new CsvHelper.Configuration.CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)
@@ -64,9 +73,6 @@ namespace Game
                 }
             }
         }
-
-
-
 
         #endregion
 
@@ -86,7 +92,7 @@ namespace Game
                 var ns = new System.Xml.Serialization.XmlSerializerNamespaces();
                 ns.Add(string.Empty, string.Empty);
                 objXS.Serialize(objSW, entity, ns);
-                return objSW.ToString().Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
+                return objSW.ToString().Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", String.Empty);
             }
         }
 
