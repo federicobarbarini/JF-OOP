@@ -1,7 +1,7 @@
-Nome;Squadra;Velocit…;Tiro;Dribbling;Colpo di testa;Freddezza
-Zlatan;JF;51;97;75;98;95
-Lautaro;JF;85;88;80;75;68
-Giacomo;JF;90;83;89;55;81
-Dusan;CFS;91;98;82;93;90
-Victor;CFS;89;95;84;91;88
-Gianluca;CFS;83;90;81;92;79
+Nome;Squadra;Velocit…;Tiro;Dribbling;Colpo di testa;Freddezza;Ruolo
+Zlatan;JF;51;97;75;98;95;
+Lautaro;JF;85;88;80;75;68;
+Giacomo;JF;90;83;89;55;81;
+Dusan;CFS;91;98;82;93;90;
+Victor;CFS;89;95;84;91;88;
+Gianluca;CFS;83;90;81;92;79;

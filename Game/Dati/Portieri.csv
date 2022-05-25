@@ -1,5 +1,5 @@
-Nome;Squadra;Velecita;Tuffo;Riflessi;Parata
-Mike;JF;71;86;91;93
-Samir;JF;40;80;75;83
-Tek;CFS;65;83;90;91
-Guglielmo;CFS;76;81;93;88
+Nome;Squadra;Velocita;Tuffo;Riflessi;Parata;Ruolo
+Mike;JF;71;86;91;93;
+Samir;JF;40;80;75;83;
+Tek;CFS;65;83;90;91;
+Guglielmo;CFS;76;81;93;88;

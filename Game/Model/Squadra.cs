@@ -8,7 +8,7 @@ namespace Game.Model
 {
     public class Squadra: List<Calciatore>, iPersonaggio
     {
-        public string Name { get; set; }
+        public string? Nome { get; set; }
         public void Su(int passi) {
             foreach (var item in this) {
                 item.Su(passi);

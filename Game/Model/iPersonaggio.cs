@@ -8,7 +8,7 @@ namespace Game.Model
 {
     public interface iPersonaggio
     {
-        public string Name { get; set; }
+        public string? Nome { get; set; }
         public void Su (int passi) { }
         public void Giu (int passi) { }
         public void Destra (int passi) { }  
