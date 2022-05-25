@@ -8,7 +8,7 @@ namespace Game.Model
 {
     public class Portiere: Calciatore
     {
-        public Portiere() : base() { this.Ruolo = "Portiere"; }
+        //public Portiere() : base() { this.Ruolo = "Portiere"; }
         public int Tuffo { get; set; }
         public int Parata { get; set; }
         public int Riflessi { get; set; }

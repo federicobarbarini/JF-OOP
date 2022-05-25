@@ -10,25 +10,25 @@ namespace Game.Model
     {
         public string? Nome { get; set; }
         public void Su(int passi) {
-            foreach (var item in this) {
+            foreach (var item in this.Titolari) {
                 item.Su(passi);
             }
         }
 
         public void Giu(int passi) {
-            foreach (var item in this) {
+            foreach (var item in this.Titolari) {
                 item.Giu(passi);
             }
         }
         public void Destra(int passi) {
-         foreach (var item in this)
+         foreach (var item in this.Titolari)
                     {
                         item.Destra(passi);
                     }
                 }
         public void Sinistra(int passi)
         {
-            foreach (var item in this)
+            foreach (var item in this.Titolari)
             {
                 item.Sinistra(passi);
             }
@@ -60,5 +60,36 @@ namespace Game.Model
             }
         }
 
+        public List<Calciatore> Titolari { get; set; } = new List<Calciatore>();
+        public List<Calciatore> Riserve { get; set; } = new List<Calciatore>();
+
+        public void Distinta() { 
+            if(this.Titolari.Count() == 0) {
+                Console.WriteLine("Non ci sono Titolari vuoi caricarmi la distinta?");
+                var r = Console.ReadLine();
+                if(r.ToUpperInvariant() == "SI")
+                {
+                    foreach (var item in this)
+                    {
+                        Console.WriteLine("Ruolo: {0} - Nome: {1} titolare?", item.Ruolo, item.Nome);
+                        var x = Console.ReadLine();
+                        if (x.ToUpper() == "T") { 
+                            this.Titolari.Add(item);
+                            
+                        }
+                        if (x.ToUpper() == "R") { this.Riserve.Add(item); }
+                    }
+                }
+            };
+            Console.WriteLine("Titolari: ");
+            foreach (var d in this.Titolari) { 
+                   Console.WriteLine("Ruolo: {0} - Nome: {1}", d.Ruolo, d.Nome); 
+            }
+                Console.WriteLine("Riserve: ");
+            foreach (var d in this.Riserve)
+            {
+             Console.WriteLine("Ruolo: {0} - Nome: {1}", d.Ruolo, d.Nome);
+            }
+        }
     }
 }

@@ -9,7 +9,12 @@ namespace Game.Model
     public class Calciatore: iPersonaggio
     {
         public string? Nome { get; set; }
-        public string? Ruolo { get; set; }
+        public string? Ruolo {
+            get
+            {
+                return this.GetType().Name;
+            }
+        }
         public string? Squadra { get; set; }
         public int? Velocita { get; set; }
 

@@ -1,9 +1,5 @@
-Nome;Squadra;Velocita;Passaggio;Visione;Cross;Ruolo
-Adrien;JF;83;67;65;64;
-Frank;JF;78;81;75;76;
-Piotr;JF;75;85;80;78;
-Sandro;JF;81;88;86;85;
-Sergej;CFS;75;90;88;89;
-Marcelo;CFS;68;92;95;85;
-Bryan;CFS;63;75;72;65;
-Fabian;CFS;78;84;81;79;
+Visione;Passaggio;Cross;Nome;Ruolo;Squadra;Velocita
+65;67;64;Adrien;Centrocampista;JF;83
+75;81;76;Frank;Centrocampista;JF;78
+80;85;78;Piotr;Centrocampista;JF;75
+86;88;85;Sandro;Centrocampista;JF;81

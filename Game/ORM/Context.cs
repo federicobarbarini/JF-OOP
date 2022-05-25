@@ -6,8 +6,32 @@ using System.Threading.Tasks;
 
 namespace Game.ORM
 {
-    //public class Context
-    //{
+    public static class Context
+    {
+        public static void Load(Model.Squadra item)
+        {
+            item.AddRange((from x in Game.Helper.FromCSV<Game.Model.Portiere>("Portieri.csv") where x.Squadra == item.Nome select x).ToArray());
+            item.AddRange((from x in Game.Helper.FromCSV<Game.Model.Difensore>("Difensori.csv") where x.Squadra == item.Nome select x).ToArray());
+            item.AddRange((from x in Game.Helper.FromCSV<Game.Model.Centrocampista>("Centrocampisti.csv") where x.Squadra == item.Nome select x).ToArray());
+            item.AddRange((from x in Game.Helper.FromCSV<Game.Model.Attaccante>("Attaccanti.csv") where x.Squadra == item.Nome select x).ToArray());
+            item.Titolari.AddRange((from x in Game.Helper.FromCSV<Game.Model.Calciatore>("Titolari.csv") where x.Squadra == item.Nome select x).ToArray());
+            item.Riserve.AddRange((from x in Game.Helper.FromCSV<Game.Model.Calciatore>("Riserve.csv") where x.Squadra == item.Nome select x).ToArray());
+        }
+
+        public static void Save(Model.Squadra item)
+        {
+
+            Helper.ToCSV(item.Portieri, "Portieri.csv", ";");
+            Helper.ToCSV(item.Difensori, "Difensori.csv", ";");
+            Helper.ToCSV(item.Attaccanti, "Attaccanti.csv", ";");
+            Helper.ToCSV(item.Centrocampisti, "Centrocampisti.csv", ";");
+
+            Helper.ToCSV(item.Titolari.ToArray(), "Titolari.csv", ";");
+            Helper.ToCSV(item.Riserve.ToArray(), "Riserve.csv", ";");
+
+        }
+
+    }
 
     //    private string path = string.Empty;
 
