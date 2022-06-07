@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Game.Model
 {
+    [XmlInclude(typeof(Portiere))]
+    [XmlInclude(typeof(Difensore))]
+    [XmlInclude(typeof(Centrocampista))]
+    [XmlInclude(typeof(Attaccante))]
     public class Calciatore: iPersonaggio
     {
         public string? Nome { get; set; }

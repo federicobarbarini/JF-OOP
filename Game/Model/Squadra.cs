@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game.Model
 {
-    public class Squadra: List<Calciatore>, iPersonaggio
+    public class Squadra: iPersonaggio
     {
         public string? Nome { get; set; }
         public void Su(int passi) {
@@ -35,32 +35,35 @@ namespace Game.Model
         }
         public Portiere[] Portieri { 
             get {
-                return (from x in this where x.Ruolo.ToLowerInvariant() == "portiere" select (Portiere)x).ToArray();    
+                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "portiere" select (Portiere)x).ToArray();    
             }
         }
         public Difensore[] Difensori
         {
             get
             {
-                return (from x in this where x.Ruolo.ToLowerInvariant() == "difensore" select (Difensore)x).ToArray();
+                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "difensore" select (Difensore)x).ToArray();
             }
         }
         public Centrocampista[] Centrocampisti
         {
             get
             {
-                return (from x in this where x.Ruolo.ToLowerInvariant() == "centrocampista" select (Centrocampista)x).ToArray();
+                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "centrocampista" select (Centrocampista)x).ToArray();
             }
         }
 
         public Attaccante[] Attaccanti {
             get
             {
-                return (from x in this where x.Ruolo.ToLowerInvariant() == "attaccante" select (Attaccante)x).ToArray();
+                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "attaccante" select (Attaccante)x).ToArray();
             }
         }
 
+        public List<Calciatore> Rosa { get; set; } = new List<Calciatore>();
+
         public List<Calciatore> Titolari { get; set; } = new List<Calciatore>();
+
         public List<Calciatore> Riserve { get; set; } = new List<Calciatore>();
 
         public void Distinta() { 
@@ -69,26 +72,23 @@ namespace Game.Model
                 var r = Console.ReadLine();
                 if(r.ToUpperInvariant() == "SI")
                 {
-                    foreach (var item in this)
+                    foreach (var item in this.Rosa)
                     {
                         Console.WriteLine("Ruolo: {0} - Nome: {1} titolare?", item.Ruolo, item.Nome);
                         var x = Console.ReadLine();
-                        if (x.ToUpper() == "T") { 
-                            this.Titolari.Add(item);
-                            
-                        }
-                        if (x.ToUpper() == "R") { this.Riserve.Add(item); }
+                        if (x.ToUpper() == "T") this.Titolari.Add(item);
+                        if (x.ToUpper() == "R") this.Riserve.Add(item);
                     }
                 }
             };
             Console.WriteLine("Titolari: ");
             foreach (var d in this.Titolari) { 
-                   Console.WriteLine("Ruolo: {0} - Nome: {1}", d.Ruolo, d.Nome); 
+                Console.WriteLine("Ruolo: {0} - Nome: {1}", d.Ruolo, d.Nome); 
             }
-                Console.WriteLine("Riserve: ");
+            Console.WriteLine("Riserve: ");
             foreach (var d in this.Riserve)
             {
-             Console.WriteLine("Ruolo: {0} - Nome: {1}", d.Ruolo, d.Nome);
+                Console.WriteLine("Ruolo: {0} - Nome: {1}", d.Ruolo, d.Nome);
             }
         }
     }

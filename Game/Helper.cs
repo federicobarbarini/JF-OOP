@@ -41,9 +41,9 @@ namespace Game
             {
                 Delimiter = delimiter
             };
-            config.MissingFieldFound = (CsvHelper.MissingFieldFoundArgs args) =>{ };
+            //config.MissingFieldFound = (CsvHelper.MissingFieldFoundArgs args) =>{ };
 
-            using (var r = new System.IO.StreamReader(System.IO.Path.Combine("../../../dati", nfile)))
+            using (var r = new System.IO.StreamReader(System.IO.Path.Combine(ORM.Context.DatiPath, nfile)))
             {
                 using (var c = new CsvHelper.CsvReader(r, config))
                 {
@@ -65,7 +65,7 @@ namespace Game
             {
                 Delimiter = delimiter
             };
-            using (var writer = new StreamWriter(System.IO.Path.Combine("../../../dati", nFile)))
+            using (var writer = new StreamWriter(System.IO.Path.Combine(ORM.Context.DatiPath, nFile)))
             {
                 using (var csv = new CsvHelper.CsvWriter(writer, config))
                 {
@@ -78,12 +78,31 @@ namespace Game
 
         #region --> XML
 
+        public static void ToXMLFile<T>(this T entity, string nFile) where T : class
+        {
+            var xml = ToXML(entity);
+            var filePath = System.IO.Path.Combine(ORM.Context.DatiPath, nFile);   
+
+            if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath); 
+            System.IO.File.WriteAllText(filePath, xml, System.Text.Encoding.UTF8);
+        }
+
+        public static T FromXMLFile<T>(string nFile) where T : class
+        {
+            var filePath = System.IO.Path.Combine(ORM.Context.DatiPath, nFile);
+            if (!System.IO.File.Exists(filePath)) throw new ArgumentNullException(String.Format("Il file {0} non esiste.", filePath));
+
+            var xml = System.IO.File.ReadAllText(filePath, System.Text.Encoding.UTF8);
+            return FromXML<T>(xml);
+        }
+
+
         /// <summary>
-        /// 
+        /// Esporta un Entità in una striga XML
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Tipo di classe</typeparam>
+        /// <param name="entity">Oggetto da esportare</param>
+        /// <returns>Stringa XML</returns>
         public static string ToXML<T>(this T entity) where T : class
         {
             var objXS = new System.Xml.Serialization.XmlSerializer(entity.GetType());
@@ -96,6 +115,12 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Importa un stringa XML in un oggetto
+        /// </summary>
+        /// <typeparam name="T">tipo di oggetto da ottenere</typeparam>
+        /// <param name="xml">Stringa XML da da importare</param>
+        /// <returns>oggetto ottenuto</returns>
         public static T FromXML<T>(string xml) where T : class
         {
             return (T)FromXML(typeof(T), xml);
@@ -115,6 +140,21 @@ namespace Game
         }
 
         #endregion
+
+        #region --> JSON
+
+        public static string ToJSON<T>(this T entity) where T : class
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(entity);
+        }
+
+        public static T FromJSON<T>(string json) where T : class
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+        }
+
+        #endregion
+
 
     }
 }
