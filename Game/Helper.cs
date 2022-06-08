@@ -155,20 +155,19 @@ namespace Game
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
         }
 
-        public static void ToJSONFile<T>(this T entity, string nFile) where T : class
+        public static void ToJSONFile<T>(this T entity, string filePath) where T : class
         {
             var js = ToJSON(entity);
-            var filePath = System.IO.Path.Combine(ORM.Context.DatiPath, nFile);
-
+            var fInfo = new System.IO.FileInfo(filePath);
+            if (!fInfo.Directory.Exists) throw new ArgumentNullException(String.Format("La directory {0} non esiste.", fInfo.DirectoryName));
+            
             if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath);
             System.IO.File.WriteAllText(filePath, js, System.Text.Encoding.UTF8);
         }
 
-        public static T FromJSONFile<T>(string nFile) where T : class
+        public static T FromJSONFile<T>(string filePath) where T : class
         {
-            var filePath = System.IO.Path.Combine(ORM.Context.DatiPath, nFile);
             if (!System.IO.File.Exists(filePath)) throw new ArgumentNullException(String.Format("Il file {0} non esiste.", filePath));
-
             var js = System.IO.File.ReadAllText(filePath, System.Text.Encoding.UTF8);
             return FromJSON<T>(js);
         }

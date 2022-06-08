@@ -24,7 +24,7 @@ namespace Game.ORM
             var pathJS = System.IO.Path.Combine(DatiPath, nFile + ".json");
             if (System.IO.File.Exists(pathJS))
             {
-                return Helper.FromJSONFile<Model.Squadra>((new System.IO.FileInfo(pathJS)).Name);
+                return Helper.FromJSONFile<Model.Squadra>(pathJS);
             }
             else if (System.IO.File.Exists(pathXML))
             {
@@ -56,7 +56,9 @@ namespace Game.ORM
             //var nFile = "Squadra." + item.Nome + ".xml";
             //item.ToXMLFile(nFile);
             var nFile = "Squadra." + item.Nome + ".json";
-            item.ToJSONFile(nFile);
+            var filePath = System.IO.Path.Combine(ORM.Context.DatiPath, nFile);
+
+            item.ToJSONFile(filePath);
         }
 
         #endregion
