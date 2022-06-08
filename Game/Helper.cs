@@ -159,7 +159,7 @@ namespace Game
         {
             var js = ToJSON(entity);
             var fInfo = new System.IO.FileInfo(filePath);
-            if (!fInfo.Directory.Exists) throw new ArgumentNullException(String.Format("La directory {0} non esiste.", fInfo.DirectoryName));
+            if (!fInfo.Directory.Exists) throw new Exceptions.DirectoryNotExist(fInfo.DirectoryName);
             
             if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath);
             System.IO.File.WriteAllText(filePath, js, System.Text.Encoding.UTF8);
