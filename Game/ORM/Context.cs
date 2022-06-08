@@ -20,7 +20,7 @@ namespace Game.ORM
         public static Model.Squadra Load(string nome)
         {
             var nFile = "Squadra." + nome;
-            var pathXML = System.IO.Path.Combine(DatiPath, nFile+".xml");
+            var pathXML = System.IO.Path.Combine(DatiPath, nFile + ".xml");
             var pathJS = System.IO.Path.Combine(DatiPath, nFile + ".json");
             if (System.IO.File.Exists(pathJS))
             {
@@ -28,7 +28,7 @@ namespace Game.ORM
             }
             else if (System.IO.File.Exists(pathXML))
             {
-                return Helper.FromXMLFile<Model.Squadra>((new System.IO.FileInfo(pathXML)).Name);
+                return Helper.FromXMLFile<Model.Squadra>(pathXML);
             } 
             else 
             {

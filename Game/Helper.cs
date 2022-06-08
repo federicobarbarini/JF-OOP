@@ -78,19 +78,19 @@ namespace Game
 
         #region --> XML
 
-        public static void ToXMLFile<T>(this T entity, string nFile) where T : class
+        public static void ToXMLFile<T>(this T entity, string filePath) where T : class
         {
             var xml = ToXML(entity);
-            var filePath = System.IO.Path.Combine(ORM.Context.DatiPath, nFile);   
+            var fInfo = new System.IO.FileInfo(filePath);
+            if (!fInfo.Directory.Exists) throw new Exceptions.DirectoryNotExist(fInfo.DirectoryName);
 
             if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath); 
             System.IO.File.WriteAllText(filePath, xml, System.Text.Encoding.UTF8);
         }
 
-        public static T FromXMLFile<T>(string nFile) where T : class
+        public static T FromXMLFile<T>(string filePath) where T : class
         {
-            var filePath = System.IO.Path.Combine(ORM.Context.DatiPath, nFile);
-            if (!System.IO.File.Exists(filePath)) throw new ArgumentNullException(String.Format("Il file {0} non esiste.", filePath));
+            if (!System.IO.File.Exists(filePath)) throw new Exceptions.FileNotExist(filePath);
 
             var xml = System.IO.File.ReadAllText(filePath, System.Text.Encoding.UTF8);
             return FromXML<T>(xml);
@@ -167,7 +167,7 @@ namespace Game
 
         public static T FromJSONFile<T>(string filePath) where T : class
         {
-            if (!System.IO.File.Exists(filePath)) throw new ArgumentNullException(String.Format("Il file {0} non esiste.", filePath));
+            if (!System.IO.File.Exists(filePath)) throw new Exceptions.FileNotExist(filePath);
             var js = System.IO.File.ReadAllText(filePath, System.Text.Encoding.UTF8);
             return FromJSON<T>(js);
         }
