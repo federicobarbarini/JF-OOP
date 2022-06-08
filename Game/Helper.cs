@@ -145,11 +145,13 @@ namespace Game
 
         public static string ToJSON<T>(this T entity) where T : class
         {
+            if (entity == null) return string.Empty;
             return Newtonsoft.Json.JsonConvert.SerializeObject(entity);
         }
 
         public static T FromJSON<T>(string json) where T : class
         {
+            if (string.IsNullOrEmpty(json)) throw new ArgumentNullException("FromJSON json String is null or empty");
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
         }
 
