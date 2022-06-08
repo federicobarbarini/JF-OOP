@@ -7,10 +7,24 @@ namespace Game // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            var JF = Context.Load("JF");
-            JF.Distinta();
-            Context.Save(JF);
+            try
+            {
+                var JF = Context.Load("JF");
+                JF.Distinta();
+                Context.Save(JF);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex.Message);
+            };
 
+            
 
 
             //if (JF.Titolari.Count() != 0)

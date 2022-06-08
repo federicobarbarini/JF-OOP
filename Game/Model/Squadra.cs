@@ -8,7 +8,49 @@ namespace Game.Model
 {
     public class Squadra: iPersonaggio
     {
+
+        #region --> Proprieta
+        public Portiere[] Portieri
+        {
+            get
+            {
+                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "portiere" select (Portiere)x).ToArray();
+            }
+        }
+        public Difensore[] Difensori
+        {
+            get
+            {
+                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "difensore" select (Difensore)x).ToArray();
+            }
+        }
+        public Centrocampista[] Centrocampisti
+        {
+            get
+            {
+                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "centrocampista" select (Centrocampista)x).ToArray();
+            }
+        }
+
+        public Attaccante[] Attaccanti
+        {
+            get
+            {
+                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "attaccante" select (Attaccante)x).ToArray();
+            }
+        }
         public string? Nome { get; set; }
+
+        public List<Calciatore> Rosa { get; set; } = new List<Calciatore>();
+
+        public List<Calciatore> Titolari { get; set; } = new List<Calciatore>();
+
+        public List<Calciatore> Riserve { get; set; } = new List<Calciatore>();
+
+        #endregion
+
+        #region --> Metodi
+
         public void Su(int passi) {
             foreach (var item in this.Titolari) {
                 item.Su(passi);
@@ -33,38 +75,6 @@ namespace Game.Model
                 item.Sinistra(passi);
             }
         }
-        public Portiere[] Portieri { 
-            get {
-                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "portiere" select (Portiere)x).ToArray();    
-            }
-        }
-        public Difensore[] Difensori
-        {
-            get
-            {
-                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "difensore" select (Difensore)x).ToArray();
-            }
-        }
-        public Centrocampista[] Centrocampisti
-        {
-            get
-            {
-                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "centrocampista" select (Centrocampista)x).ToArray();
-            }
-        }
-
-        public Attaccante[] Attaccanti {
-            get
-            {
-                return (from x in this.Rosa where x.Ruolo.ToLowerInvariant() == "attaccante" select (Attaccante)x).ToArray();
-            }
-        }
-
-        public List<Calciatore> Rosa { get; set; } = new List<Calciatore>();
-
-        public List<Calciatore> Titolari { get; set; } = new List<Calciatore>();
-
-        public List<Calciatore> Riserve { get; set; } = new List<Calciatore>();
 
         public void Distinta() { 
             if(this.Titolari.Count() == 0) {
@@ -91,5 +101,8 @@ namespace Game.Model
                 Console.WriteLine("Ruolo: {0} - Nome: {1}", d.Ruolo, d.Nome);
             }
         }
+
+        #endregion
+
     }
 }

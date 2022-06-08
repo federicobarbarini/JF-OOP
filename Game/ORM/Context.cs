@@ -9,7 +9,6 @@ namespace Game.ORM
     public static class Context
     {
 
-
         public static string DatiPath { get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\dati"); } }
 
         public static Model.Squadra Load(string nome)
