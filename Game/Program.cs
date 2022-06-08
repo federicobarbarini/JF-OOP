@@ -13,10 +13,11 @@ namespace Game // Note: actual namespace depends on the project name.
                 JF.Distinta();
                 Context.Save(JF);
             }
-            catch (ArgumentNullException ex)
+            catch (Exceptions.DirectoryNotExist ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(ex.Message);
+                //throw ex;
             }
             catch (Exception ex)
             {
