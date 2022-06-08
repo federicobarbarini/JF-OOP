@@ -149,6 +149,12 @@ namespace Game
             return Newtonsoft.Json.JsonConvert.SerializeObject(entity);
         }
 
+        public static T FromJSON<T>(string json) where T : class
+        {
+            if (string.IsNullOrEmpty(json)) throw new ArgumentNullException("FromJSON json String is null or empty");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+        }
+
         public static void ToJSONFile<T>(this T entity, string nFile) where T : class
         {
             var js = ToJSON(entity);
@@ -158,19 +164,13 @@ namespace Game
             System.IO.File.WriteAllText(filePath, js, System.Text.Encoding.UTF8);
         }
 
-        public static T FromJSON<T>(string json) where T : class
-        {
-            if (string.IsNullOrEmpty(json)) throw new ArgumentNullException("FromJSON json String is null or empty");
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
-        }
-
         public static T FromJSONFile<T>(string nFile) where T : class
         {
             var filePath = System.IO.Path.Combine(ORM.Context.DatiPath, nFile);
             if (!System.IO.File.Exists(filePath)) throw new ArgumentNullException(String.Format("Il file {0} non esiste.", filePath));
 
             var js = System.IO.File.ReadAllText(filePath, System.Text.Encoding.UTF8);
-            return FromJSONFile<T>(js);
+            return FromJSON<T>(js);
         }
 
         #endregion
